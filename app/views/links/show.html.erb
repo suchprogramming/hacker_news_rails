@@ -1,5 +1,11 @@
 <h1><%= @link.name %></h1>
 
-<h4><%= @link.url %></h4>
+<ul>
+  <% @link.comments.each do |comment| %>
+  <li><%= comment.user_name %> <%= comment.comment_text %></li>
+  <% end %>
+</ul>
+
+<p><%= link_to 'Add Comment', new_link_comment_path(@link) %></p>
 
 <p><%= link_to 'Back', links_path %></p>
