@@ -1,8 +1,17 @@
-<h1>Links</h1>
+<h1>Hacker News</h1>
+
+<h4>Article List</h4>
 
 <ul>
   <% @links.each do |link| %>
-    <li><%= link_to link.url, 'http://' + link.url %> <%= link_to 'comments', link_path(link) %> <small><%= link_to '(edit)', edit_link_path(link) %></small> </li>
+    <li>
+      <%= link_to link.url, 'http://' + link.url %>
+      <%= link_to 'comments', link_path(link) %>
+      <small><%= link_to '(edit)', edit_link_path(link) %></small>
+      <small><%= link_to '(delete)', link_path(link),
+                                        :data => {:confirm => 'Are you sure?',
+                                        :method => 'delete' } %></small>
+    </li>
   <% end %>
 </ul>
 
