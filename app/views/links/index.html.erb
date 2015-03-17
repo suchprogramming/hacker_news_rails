@@ -1,0 +1,9 @@
+<h1>Links</h1>
+
+<ul>
+  <% @links.each do |link| %>
+    <li><%= link_to link.url, 'http://' + link.url %> <%= link_to 'comments', link_path(link) %> </li>
+  <% end %>
+</ul>
+
+<p><%= link_to 'Create New Link', new_link_path %></p>
