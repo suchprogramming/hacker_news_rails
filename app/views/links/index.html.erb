@@ -5,14 +5,28 @@
 <ul>
   <% @links.each do |link| %>
     <li>
-      <%= link_to link.url, 'http://' + link.url %>
-      <%= link_to 'comments', link_path(link) %>
+      <%= link_to link.url, "http://#{link.url}" %>
+      <%= link_to "comments (#{link.comments.count})", link_path(link) %>
       <small><%= link_to '(edit)', edit_link_path(link) %></small>
       <small><%= link_to '(delete)', link_path(link),
                                         :data => {:confirm => 'Are you sure?',
                                         :method => 'delete' } %></small>
+
+      <small>Link Score : <%= link.link_score%></small>
+
+      <%= form_for link do |f| %>
+        <%= f.hidden_field :link_score, value: link.link_score += 1 %>
+        <%= f.button 'Up Vote' %>
+      <% end %>
+
+      <%= link_to "Down Vote", link_downvote_path(link)  %>
+
+
+      <br>
+
     </li>
   <% end %>
+
 </ul>
 
 <p><%= link_to 'Create New Link', new_link_path %></p>
